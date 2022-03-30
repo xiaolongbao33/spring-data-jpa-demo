@@ -4,13 +4,10 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "customer_info")
 public class Customer {
 
     @Id
-    @Column(name="customer_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@SequenceGenerator(name = "customer_pk_sequence",sequenceName = "customer_pk_sequence")
     private int id;
 
     @Column(name = "full_name")
