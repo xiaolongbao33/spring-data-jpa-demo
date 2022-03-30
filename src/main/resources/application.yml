@@ -1,0 +1,13 @@
+# this is a yml (or yaml) file which allows us to configure any additional configuration in our spring boot app
+#server:
+#  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://training-db.cjk8aacizjxv.us-east-1.rds.amazonaws.com:5432/postgres
+    username: postgres
+    password: p4ssw0rd
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
