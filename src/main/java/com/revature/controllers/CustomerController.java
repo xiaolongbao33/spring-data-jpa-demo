@@ -1,11 +1,13 @@
 package com.revature.controllers;
 
 import com.revature.models.Customer;
-import com.revature.services.CustomerMockService;
+import com.revature.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -13,28 +15,27 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    CustomerMockService customerMockService;
+    CustomerService customerService;
 
     @GetMapping("/customers")
     public List<Customer> getCustomerHandler(@RequestParam(required = false, value = "name") String nameParam){
         System.out.println("Name Parameter: " + nameParam);
         if(nameParam==null){ // GET /customers
-            return customerMockService.getAllCustomers();
+            return customerService.getAllCustomers();
         } else { // GET /customers?name=...
-            return customerMockService.getCustomersByName(nameParam);
+            return customerService.getCustomersByName(nameParam);
         }
     }
 
     @GetMapping("/customers/{id}")
     public Customer getCustomerById(@PathVariable("id")int idParam) {
-        return customerMockService.getCustomerById(idParam);
+        return customerService.getCustomerById(idParam);
     }
 
     @PostMapping("/customers")
-    public String addNewCustomer(@RequestBody Customer newCustomer){
+    public Customer addNewCustomer(@RequestBody Customer newCustomer){
         System.out.println("We got a customer object:  "+newCustomer);
-        customerMockService.addNewCustomer(newCustomer);
-        return "you added a new customer named "+ newCustomer.getName();
+        return customerService.addNewCustomer(newCustomer);
     }
 
 }

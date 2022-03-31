@@ -5,9 +5,15 @@
 spring:
   datasource:
     url: jdbc:postgresql://training-db.cjk8aacizjxv.us-east-1.rds.amazonaws.com:5432/postgres
-    username: postgres
-    password: p4ssw0rd
+    username: ${DB_USER}
+    password: ${DB_PASS}
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
+
+# supported values for ddl-auto property (correspond hibernate's hbm2ddl property)
+# create - drop any current entities with the same name, and then create those entities
+# update - will update schema based on java objects to align with java app
+# validate - will not change schema, will throw an exception if there is any mismatch
+# create-drop - create necessary entities, and then drop them when the application terminates
